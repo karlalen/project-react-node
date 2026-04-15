@@ -1,0 +1,74 @@
+/* src/componentes/TaskInput.css */
+.task-input-container {
+    background: white;
+    border-radius: 20px;
+    padding: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 12px;
+    transition: all 0.3s ease;
+}
+
+.task-input-container:focus-within {
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+    transform: translateY(-2px);
+}
+
+.task-input {
+    flex: 1;
+    padding: 16px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background: #fafafa;
+}
+
+.task-input:focus {
+    outline: none;
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.task-input::placeholder {
+    color: #bbb;
+    font-size: 0.95rem;
+}
+
+.add-button {
+    padding: 16px 32px;
+    background: rgb(62, 171, 62);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.add-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.add-button:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .task-input-container {
+        flex-direction: column;
+        padding: 12px;
+    }
+    
+    .add-button {
+        padding: 14px;
+    }
+}

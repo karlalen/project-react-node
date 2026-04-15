@@ -1,0 +1,76 @@
+/* src/componentes/Footer.css */
+.footer {
+    margin-top: 40px;
+    padding: 24px 32px;
+    background: white;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.footer-stat {
+    flex: 1;
+    text-align: center;
+    padding: 12px;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.footer-stat:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.footer-stat .label {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.footer-stat .value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.footer-stat.total .value {
+    color: #667eea;
+}
+
+.footer-stat.completed .value {
+    color: #51cf66;
+}
+
+.footer-stat.pending .value {
+    color: #ff6b6b;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        gap: 12px;
+        padding: 20px;
+    }
+    
+    .footer-stat .value {
+        font-size: 1.4rem;
+    }
+}
