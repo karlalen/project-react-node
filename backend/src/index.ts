@@ -19,7 +19,12 @@ const adapter = new PrismaPg({
 const prisma = new PrismaClient({ adapter});
 
 const app = express();
-const PORT = 3000;
+//const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 // Activamos CORS para permitir peticiones desde el frontend
 app.use(cors());
