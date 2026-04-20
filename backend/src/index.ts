@@ -22,6 +22,9 @@ const app = express();
 //const PORT = 3000;
 const PORT = process.env.PORT || 3000;
 
+const jwt = require('jsonwebtoken');
+const SECRET_KEY = "mi_clave_secreta";
+
 // Activamos CORS para permitir peticiones desde el frontend
 app.use(cors());
 
@@ -35,9 +38,50 @@ app.use(express.json());
 
 
 
+// Rutas públicas
+
 app.get("/", (req: any, res: any) => {
   res.send("Backend is working!");
 });
+
+app.post("/login", (req: any, res: any) => {
+  const { username, password } = req.body;
+
+  if (username === "admin" && password === "1234") {
+    const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: "1h" });
+    res.json({ token });
+  } else {
+    res.status(401).json({ error: "Credenciales inválidas" });
+  }
+});
+
+// Middleware JWT
+
+const verifyToken = (req: any, res: any, next: any) => {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1]; // Bearer <token>
+
+  if (!token) {
+    return res.status(401).json({ error: "Token requerido" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, SECRET_KEY);
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return res.status(403).json({ error: "Token inválido o expirado" });
+  }
+};
+
+// Ruta protegida -------------------------------------------------------
+
+app.get("/private", verifyToken, (req: any, res: any) => {
+  res.json({ message: "Acceso permitido" });
+});
+
+
+// Rutas /tasks (sin protección, como indica la consigna)
 app.get("/tasks", async( req: any, res:any) => {
   try{
     const tasks = await prisma.task.findMany();
