@@ -7,7 +7,7 @@ type TaskInputProps = {
 
 function TaskInput({ onAdd }: TaskInputProps) {
   const [value, setValue] = useState("");
-  const [error, setError] = useState(false);
+  const [, setError] = useState(false);
 
 
   const handleAdd = () => {
