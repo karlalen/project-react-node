@@ -1,17 +1,49 @@
-# React + Vite
+# Task Manager (React + Node)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación de gestión de tareas: un frontend en React (Vite) que consume una API REST en Express con autenticación JWT y persistencia en PostgreSQL vía Prisma.
 
-Currently, two official plugins are available:
+##  Instalación local
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+git clone https://github.com/karlalen/project-react-node.git
+cd project-react-node
+npm install
+cd backend
+npm install
+cd ..
+```
 
-## React Compiler
+### Variables de entorno
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Crea un archivo `.env` en la raíz del proyecto con:
 
-## Expanding the ESLint configuration
+```
+VITE_API_URL=
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# project-react-node
+Crea un archivo `.env` en `backend/` con las siguientes claves (sin valores reales en este documento):
+
+```
+DATABASE_URL=
+JWT_SECRET=
+PORT=
+```
+
+## Comandos disponibles
+
+### Frontend (raíz del proyecto)
+
+| Comando          | Descripción                              |
+|------------------|-------------------------------------------|
+| `npm run dev`     | Levanta el entorno de desarrollo (Vite)    |
+| `npm run build`   | Genera el build de producción              |
+
+### Backend (`backend/`)
+
+| Comando        | Descripción                                   |
+|----------------|-------------------------------------------------|
+| `npm run dev`   | Levanta el servidor Express en modo desarrollo (ts-node-dev) |
+
+##  Base de datos
+
+PostgreSQL con esquema y migraciones gestionados con Prisma (`backend/prisma/schema.prisma`).
