@@ -36,8 +36,6 @@ app.use(express.json());
   { id: 2, text: "Build backend", done: true },
 ];*/
 
-
-
 // Rutas públicas
 
 app.get("/", (req: any, res: any) => {
