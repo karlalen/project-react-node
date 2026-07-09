@@ -49,3 +49,4 @@ PORT=
 ##  Base de datos
 
 PostgreSQL con esquema y migraciones gestionados con Prisma (`backend/prisma/schema.prisma`).
+# prueba de protección
