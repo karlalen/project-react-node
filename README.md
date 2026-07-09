@@ -2,6 +2,8 @@
 
 Aplicación de gestión de tareas: un frontend en React (Vite) que consume una API REST en Express con autenticación JWT y persistencia en PostgreSQL vía Prisma.
 
+<!-- BADGE_CI -->
+
 ##  Instalación local
 
 ```bash
