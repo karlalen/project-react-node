@@ -6,7 +6,6 @@ interface FooterProps {
 }
 
 function Footer({ total, done }: FooterProps) {
-    const pending = total - done;
     
     return (
         <footer className="footer">
