@@ -2,7 +2,7 @@
 
 Aplicación de gestión de tareas: un frontend en React (Vite) que consume una API REST en Express con autenticación JWT y persistencia en PostgreSQL vía Prisma.
 
-<!-- BADGE_CI -->
+[![CI](https://github.com/karlalen/project-react-node/actions/workflows/ci.yml/badge.svg)](https://github.com/karlalen/project-react-node/actions/workflows/ci.yml)
 
 ##  Instalación local
 
