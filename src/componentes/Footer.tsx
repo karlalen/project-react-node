@@ -5,7 +5,7 @@ interface FooterProps {
     done: number;
 }
 
-function Footer({ total, done }: FooterProps) 
+function Footer({ total, done }: FooterProps) {
     
     return (
         <footer className="footer">
