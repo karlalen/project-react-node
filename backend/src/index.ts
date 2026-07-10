@@ -67,7 +67,7 @@ const verifyToken = (req: any, res: any, next: any) => {
     const decoded = jwt.verify(token, SECRET_KEY);
     req.user = decoded;
     next();
-  } catch (error) {
+  } catch {
     return res.status(403).json({ error: "Token inválido o expirado" });
   }
 };
@@ -175,8 +175,8 @@ app.put("/tasks/:id", async (req: any, res: any) => {
       }
     });
     res.json(updatedTask);
-  }catch(error){
-
+  }catch {
+    // error ignorado intencionalmente
   }
 });
 
