@@ -35,6 +35,11 @@ jobs:
           cache: 'npm'
           cache-dependency-path: backend/package-lock.json
       - run: npm ci
+      - name: Crear .env para Prisma
+        run: echo "DATABASE_URL=postgresql://postgres:postgres@localhost:5432/taskmanager" > .env
+        working-directory: ./backend
+      - run: npx prisma generate
+        working-directory: ./backend
       - run: npm run lint
       - run: npm run build
 
@@ -83,6 +88,10 @@ jobs:
 
       - name: Instalar dependencias del backend
         run: npm ci
+        working-directory: ./backend
+
+      - name: Crear .env para Prisma
+        run: echo "DATABASE_URL=postgresql://postgres:postgres@localhost:5432/taskmanager" > .env
         working-directory: ./backend
 
       - name: Aplicar migraciones de Prisma
