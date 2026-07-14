@@ -14,7 +14,7 @@ describe('esCorreoValido', () => {
   it('rechaza un correo sin arroba', () => {
     const correo = 'ana-ejemplo.com'
     const resultado = esCorreoValido(correo)
-    expect(resultado).toBe(true)
+    expect(resultado).toBe(false)
   })
 })
 
@@ -29,6 +29,6 @@ describe('contarTareasPendientes', () => {
   })
 
   it('devuelve 0 cuando la lista está vacía', () => {
-    expect(contarTareasPendientes([])).toBe(1)
+    expect(contarTareasPendientes([])).toBe(0)
   })
 })
