@@ -94,6 +94,10 @@ jobs:
         run: echo "DATABASE_URL=postgresql://postgres:postgres@localhost:5432/taskmanager" > .env
         working-directory: ./backend
 
+      - name: Generar cliente de Prisma
+        run: npx prisma generate
+        working-directory: ./backend
+
       - name: Aplicar migraciones de Prisma
         run: npx prisma migrate deploy
         working-directory: ./backend
@@ -104,6 +108,11 @@ jobs:
 
       - name: Esperar a que el backend responda
         run: npx wait-on tcp:3000
+
+      - name: Mostrar log del backend si falló
+        if: failure()
+        run: cat backend.log
+        working-directory: ./backend
 
       - name: Instalar navegadores de Playwright
         run: npx playwright install --with-deps chromium
