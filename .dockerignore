@@ -1,0 +1,12 @@
+# .dockerignore
+# Hay que excluir explícitamente backend/ y e2e/ para no copiarlos
+# dentro de la imagen de nginx sin necesidad (y acelerar el build).
+node_modules
+.env
+.env.*
+!.env.example
+dist
+.git
+backend
+e2e
+coverage
