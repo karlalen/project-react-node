@@ -7,6 +7,11 @@ export default defineConfig([
   { ignores: ["coverage/**"] },
   { files: ["**/*.{js,mjs,cjs,ts,mts,cts}"], plugins: { js }, extends: ["js/recommended"], languageOptions: { globals: globals.browser } },
   { files: ["**/*.js"], languageOptions: { sourceType: "commonjs" } },
+  { files: ["prisma/**/*.js"],
+    languageOptions: {
+      globals: globals.node,
+    }, 
+  },
   tseslint.configs.recommended,
   {
     rules: {
