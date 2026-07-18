@@ -22,11 +22,30 @@ jobs:
       - run: npm run build
 
   backend:
-    name: Backend - Lint & Build
+    name: Backend - Lint, Build & Test
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: taskmanager
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     defaults:
       run:
         working-directory: ./backend
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/taskmanager
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -36,12 +55,18 @@ jobs:
           cache-dependency-path: backend/package-lock.json
       - run: npm ci
       - name: Crear .env para Prisma
-        run: echo "DATABASE_URL=postgresql://postgres:postgres@localhost:5432/taskmanager" > .env
+        run: echo "DATABASE_URL=$DATABASE_URL" > .env
         working-directory: ./backend
       - run: npx prisma generate
         working-directory: ./backend
       - run: npm run lint
       - run: npm run build
+      - name: Aplicar migraciones de Prisma
+        run: npx prisma migrate deploy
+        working-directory: ./backend
+      - name: Ejecutar tests del backend (Supertest)
+        run: npm test
+        working-directory: ./backend
 
   pruebas:
     name: Pruebas unitarias y cobertura
