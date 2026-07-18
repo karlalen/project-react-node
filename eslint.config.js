@@ -6,7 +6,7 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
   { ignores: ["coverage/**"] },
-  globalIgnores(['dist']),
+  globalIgnores(['dist', 'backend/**']),
   {
     files: ['**/*.{js,jsx}'],
     extends: [
