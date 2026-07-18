@@ -65,6 +65,10 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: taskmanager
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          PORT: 3000
+          VITE_API_URL: http://localhost:3000
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
         ports:
           - 5432:5432
         options: >-
