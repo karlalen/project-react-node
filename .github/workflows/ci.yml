@@ -31,8 +31,6 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: taskmanager
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
         ports:
           - 5432:5432
         options: >-
@@ -90,10 +88,6 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: taskmanager
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          PORT: 3000
-          VITE_API_URL: http://localhost:3000
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
         ports:
           - 5432:5432
         options: >-
@@ -105,6 +99,7 @@ jobs:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/taskmanager
       PORT: 3000
       VITE_API_URL: http://localhost:3000
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -120,7 +115,7 @@ jobs:
         working-directory: ./backend
 
       - name: Crear .env para Prisma
-        run: echo "DATABASE_URL=postgresql://postgres:postgres@localhost:5432/taskmanager" > .env
+        run: echo "DATABASE_URL=$DATABASE_URL" > .env
         working-directory: ./backend
 
       - name: Generar cliente de Prisma
@@ -129,6 +124,10 @@ jobs:
 
       - name: Aplicar migraciones de Prisma
         run: npx prisma migrate deploy
+        working-directory: ./backend
+
+      - name: Ejecutar seed
+        run: npx prisma db seed
         working-directory: ./backend
 
       - name: Levantar el backend en segundo plano
