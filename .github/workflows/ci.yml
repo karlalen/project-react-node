@@ -5,6 +5,11 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      confirmacion:
+        description: 'Escribe DEPLOY para confirmar el despliegue a produccion'
+        required: true
 
 jobs:
   frontend:
@@ -161,3 +166,16 @@ jobs:
         run: railway up --service backend --environment staging
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+  deploy-produccion:
+    name: Deploy a Producción (manual)
+    needs: [frontend, backend, pruebas, e2e, migraciones-produccion]
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.confirmacion == 'DEPLOY'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install -g @railway/cli
+      - name: Desplegar a Railway (produccion)
+        run: railway up --service backend --environment production
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN_PROD }}
