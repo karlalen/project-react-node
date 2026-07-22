@@ -176,6 +176,6 @@ jobs:
       - uses: actions/checkout@v4
       - run: npm install -g @railway/cli
       - name: Desplegar a Railway (produccion)
-        run: railway up --service backend --environment production
+        run: railway up --service backend --environment produccion
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN_PROD }}
