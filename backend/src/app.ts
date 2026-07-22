@@ -6,18 +6,14 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import jwt from "jsonwebtoken";
 import express, { Request, Response, NextFunction } from "express";
 
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL })
+const prisma = new PrismaClient({ adapter })
+
 console.log("APP TS EJECUTADO");
-
-// creamos el adaptador
-const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL,
-});
-
-const prisma = new PrismaClient({ adapter });
 
 const app = express();
 
-const SECRET_KEY = "mi_clave_secreta";
+const SECRET_KEY = process.env.SECRET_KEY || "mi_clave_secreta";
 
 // Activamos CORS para permitir peticiones desde el frontend
 app.use(cors());
