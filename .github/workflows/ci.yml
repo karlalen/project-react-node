@@ -140,7 +140,7 @@ jobs:
         working-directory: ./backend
 
       - name: Esperar a que el backend responda
-        run: npx wait-on tcp:3000
+        run: npx wait-on tcp:3000 --timeout 30000
 
       - name: Instalar navegadores de Playwright
         run: npx playwright install --with-deps chromium
@@ -152,9 +152,6 @@ jobs:
         if: failure()
         run: cat backend.log
         working-directory: ./backend
-
-      - name: Esperar a que el backend responda
-        run: npx wait-on tcp:3000 --timeout 30000
 
   deploy-staging:
     name: Deploy a Staging
