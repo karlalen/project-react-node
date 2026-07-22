@@ -137,13 +137,13 @@ jobs:
       - name: Esperar a que el backend responda
         run: npx wait-on tcp:3000
 
-      - name: Mostrar log del backend si falló
-        if: failure()
-        run: cat backend.log
-        working-directory: ./backend
-
       - name: Instalar navegadores de Playwright
         run: npx playwright install --with-deps chromium
 
       - name: Correr las pruebas E2E
         run: npx playwright test
+
+      - name: Mostrar log del backend si falló
+        if: failure()
+        run: cat backend.log
+        working-directory: ./backend  
