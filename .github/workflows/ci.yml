@@ -169,7 +169,7 @@ jobs:
 
   deploy-produccion:
     name: Deploy a Producción (manual)
-    needs: [frontend, backend, pruebas, e2e, migraciones-produccion]
+    needs: [frontend, backend, pruebas, e2e]
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.confirmacion == 'DEPLOY'
     runs-on: ubuntu-latest
     steps:
