@@ -129,4 +129,10 @@ app.put("/tasks/:id", async (req: Request, res: Response) => {
   }
 });
 
+// backend/src/index.js (o donde definas tus rutas)
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' })
+})
+
+
 export default app;
