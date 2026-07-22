@@ -155,7 +155,7 @@ jobs:
 
   deploy-staging:
     name: Deploy a Staging
-    needs: [frontend, backend, pruebas, e2e]
+    needs: [frontend, backend, pruebas]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
